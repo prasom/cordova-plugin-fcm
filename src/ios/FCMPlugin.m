@@ -37,6 +37,17 @@ static FCMPlugin *fcmPluginInstance;
     
 }
 
+- (void)setBadgeNumber:(CDVInvokedUrlCommand *)command {
+    int number    = [[command.arguments objectAtIndex:0] intValue];
+    
+    [self.commandDelegate runInBackground:^{
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:number];
+        
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }];
+}
+
 // GET TOKEN //
 - (void) getToken:(CDVInvokedUrlCommand *)command 
 {
@@ -48,6 +59,8 @@ static FCMPlugin *fcmPluginInstance;
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
 }
+
+
 
 // UN/SUBSCRIBE TOPIC //
 - (void) subscribeToTopic:(CDVInvokedUrlCommand *)command 

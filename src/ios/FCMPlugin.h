@@ -16,5 +16,6 @@
 - (void)notifyOfTokenRefresh:(NSString*) token;
 - (void)appEnterBackground;
 - (void)appEnterForeground;
+- (void)setBadgeNumber:(CDVInvokedUrlCommand*)command;
 
 @end
